@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-// app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/auth', require('./routes/authRoutes'));
 // app.use('/api/flights', require('./routes/flightRoutes'));
 // app.use('/api/bookings', require('./routes/bookingRoutes'));
 
