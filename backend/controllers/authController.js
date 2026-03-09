@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { sendVerificationEmail } = require('../utils/emailService');
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -13,13 +14,13 @@ const register = async (req, res) => {
   }
 
   try {
-    // Check for duplicate email
+    // duplicate email
     const existing = await User.findOne({ email: email.toLowerCase().trim() });
     if (existing) {
       return res.status(409).json({ message: 'Email is already registered' });
     }
 
-    // 6-digit verification code and set 10-minute expiry
+    // 6-digit verification code and 10-minute expiry
     const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
     const verificationCodeExpires = new Date(Date.now() + 10 * 60 * 1000);
 
@@ -32,10 +33,17 @@ const register = async (req, res) => {
       verificationCodeExpires,
     });
 
+    // Send verification email 
+    try {
+      await sendVerificationEmail(user.email, user.name, verificationCode);
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError.message);
+    }
+
     res.status(201).json({
       message: 'Registration successful. Please check your email for the verification code.',
       userId: user._id,
-      verificationCode,
+      verificationCode, // For testing — remove in production
     });
   } catch (error) {
     if (error.code === 11000) {
