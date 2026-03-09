@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const { sendVerificationEmail } = require('../utils/emailService');
 
+// @route   POST /api/auth/register
 const register = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -53,4 +54,87 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { register };
+// @route   POST /api/auth/verify-email
+const verifyEmail = async (req, res) => {
+  const { email, code } = req.body;
+
+  if (!email || !code) {
+    return res.status(400).json({ message: 'Please provide email and verification code' });
+  }
+
+  try {
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: 'Email is already verified' });
+    }
+
+    if (!user.verificationCode || !user.verificationCodeExpires) {
+      return res.status(400).json({ message: 'No verification code found. Please request a new one' });
+    }
+
+    if (user.verificationCodeExpires < new Date()) {
+      return res.status(400).json({ message: 'Verification code has expired. Please request a new one' });
+    }
+
+    if (user.verificationCode !== code.toString().trim()) {
+      return res.status(400).json({ message: 'Invalid verification code' });
+    }
+
+    user.isVerified = true;
+    user.verificationCode = undefined;
+    user.verificationCodeExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ message: 'Email verified successfully. You can now log in.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// @route   POST /api/auth/resend-verification
+const resendVerificationCode = async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: 'Please provide your email' });
+  }
+
+  try {
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: 'Email is already verified' });
+    }
+
+    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const verificationCodeExpires = new Date(Date.now() + 10 * 60 * 1000);
+
+    user.verificationCode = verificationCode;
+    user.verificationCodeExpires = verificationCodeExpires;
+    await user.save();
+
+    try {
+      await sendVerificationEmail(user.email, user.name, verificationCode);
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError.message);
+    }
+
+    res.status(200).json({
+      message: 'A new verification code has been sent to your email.',
+      verificationCode, // For testing — remove in production
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = { register, verifyEmail, resendVerificationCode };
