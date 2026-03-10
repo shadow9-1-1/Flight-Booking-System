@@ -40,4 +40,12 @@ const restrictTo = (...roles) => {
   };
 };
 
-module.exports = { protect, restrictTo };
+// Shorthand: restrict route to admin role only
+const adminOnly = (req, res, next) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Access denied. Admins Roles only.' });
+  }
+  next();
+};
+
+module.exports = { protect, restrictTo, adminOnly };
