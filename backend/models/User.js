@@ -32,6 +32,14 @@ const userSchema = new mongoose.Schema(
     verificationCodeExpires: {
       type: Date,
     },
+    role: {
+      type: String,
+      enum: {
+        values: ['user', 'admin'],
+        message: 'Role must be user or admin',
+      },
+      default: 'user',
+    },
   },
   { timestamps: true }
 );
