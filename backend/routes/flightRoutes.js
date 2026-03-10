@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { protect, adminOnly } = require('../middleware/authMiddleware');
-const { createFlight, getFlights, updateFlight, deleteFlight } = require('../controllers/flightController');
+const { createFlight, getFlights, searchFlights, updateFlight, deleteFlight } = require('../controllers/flightController');
 
 // Public
+router.get('/search', searchFlights);
 router.get('/', getFlights);
 
 // Admin only
