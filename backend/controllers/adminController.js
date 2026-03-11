@@ -69,4 +69,38 @@ const getAllFlights = async (req, res) => {
   }
 };
 
-module.exports = { getStats, getAllUsers, getAllBookings, getAllFlights };
+// @desc    Update a user's role
+// @route   PATCH /api/admin/users/:id/role
+const updateUserRole = async (req, res) => {
+  const { role } = req.body;
+
+  if (!role) {
+    return res.status(400).json({ message: 'Please provide a role' });
+  }
+
+  if (!['user', 'admin'].includes(role)) {
+    return res.status(400).json({ message: 'Invalid role. Must be user or admin' });
+  }
+
+  try {
+    const user = await User.findById(req.params.id).select('-password -verificationCode -verificationCodeExpires');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Prevent admin from demoting themselves
+    if (user._id.toString() === req.user._id.toString()) {
+      return res.status(400).json({ message: 'You cannot change your own role' });
+    }
+
+    user.role = role;
+    await user.save();
+
+    res.status(200).json({ message: `User role updated to ${role}`, user });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = { getStats, getAllUsers, getAllBookings, getAllFlights, updateUserRole };
