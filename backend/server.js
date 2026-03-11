@@ -15,7 +15,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/flights', require('./routes/flightRoutes'));
-// app.use('/api/bookings', require('./routes/bookingRoutes'));
+app.use('/api/bookings', require('./routes/bookingRoutes'));
 
 app.get('/', (req, res) => {
   res.json({ message: 'Flight Booking API is running' });
