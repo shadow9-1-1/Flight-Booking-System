@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const Booking = require('../models/Booking');
 const Flight = require('../models/Flight');
 
-// @desc    Create a new booking
+// Create a new booking
 // @route   POST /api/bookings
-// @access  Private (authenticated user)
 const createBooking = async (req, res) => {
   const { flightId, numberOfSeats } = req.body;
 
@@ -37,7 +36,7 @@ const createBooking = async (req, res) => {
 
     const totalPrice = flight.price * numberOfSeats;
 
-    // Deduct seats atomically
+    // Deduct seats
     flight.availableSeats -= numberOfSeats;
     await flight.save({ session });
 
@@ -60,4 +59,18 @@ const createBooking = async (req, res) => {
   }
 };
 
-module.exports = { createBooking };
+// Get all bookings for user
+// @route   GET /api/bookings/my-bookings
+const BookingHistory = async (req, res) => {
+  try {
+    const bookings = await Booking.find({ userId: req.user._id })
+      .populate('flightId', 'flightNumber from to date availableSeats totalSeats price')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ count: bookings.length, bookings });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = { createBooking, BookingHistory };
