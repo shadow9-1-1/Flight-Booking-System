@@ -24,6 +24,8 @@ A full-stack flight booking application built with **React** and **Node.js** tha
 - [API Reference](#-api-reference)
 - [Admin Setup](#-admin-setup)
 - [Screenshots](#-screenshots)
+  - [User Pages](#user-pages)
+  - [Admin Pages](#admin-pages)
 
 ---
 
@@ -59,7 +61,7 @@ A full-stack flight booking application built with **React** and **Node.js** tha
 | **Frontend** | React 19, React Router 7, Axios, Framer Motion, Vite        |
 | **Backend**  | Node.js, Express, Mongoose, JWT, bcryptjs                   |
 | **Database** | MongoDB                                                     |
-| **Email**    | Mailtrap                                                    |
+| **Email**    | Mailtrap / Nodemailer                                       |
 | **Auth**     | JWT tokens (7-day expiry), bcrypt password hashing          |
 
 ---
@@ -88,7 +90,7 @@ Flight-Booking-System/
 │   │   ├── bookingRoutes.js
 │   │   └── flightRoutes.js
 │   ├── script/
-│   │   └── adminScript.js        
+│   │   └── adminScript.js        # Seed default admin account
 │   ├── utils/
 │   │   └── emailService.js       # Mailtrap email sender
 │   ├── server.js
@@ -154,7 +156,7 @@ npm install
 Create a `.env` file in the `backend/` directory (see [Environment Variables](#-environment-variables)).
 
 ```bash
-# create the admin account
+# Seed the admin account
 npm run script:admin
 
 # Start the server
@@ -266,34 +268,25 @@ npm run script:admin
 
 ## 📸 Screenshots
 
+### User Pages
 
 | Page | Preview |
 |------|---------|
-| Login | ![alt text](image.png) |
-| Flight Search | ![alt text](image-1.png) |
-| Booking History | ![alt text](image-2.png) |
+| Login | ![Login](image.png) |
+| Flight Search | ![Flight Search](image-1.png) |
+| Booking History | ![Booking History](image-2.png) |
+
+### Admin Pages
+
+| Page | Preview |
+|------|---------|
+| Admin Dashboard | ![Admin Dashboard](image-3.png) |
+| Admin Flights | ![Admin Flights](image-4.png) |
+| Admin Users | ![Admin Users](image-5.png) |
+| Admin Bookings | ![Admin Bookings](image-6.png) |
+
+> **Tip:** To add screenshots, log in as admin (`admin@email.com` / `admin123`), take screenshots of each page, save them in the project root, and name them to match the filenames above.
 
 ---
 
 </div>
-
-## 👥 Development Team
-
-<p align="center">
-<table align="center" style="margin:0 auto; text-align:center;">
-<tr>
-<th align="center">Full-Stack Developer</th>
-<th align="center">Full-Stack Developer</th>
-</tr>
-<tr>
-
-<td align="center"><img src="https://avatars.githubusercontent.com/u/154564347?s=100&v=4" width="100" height="100"><br>Ahmed Sameh</td>
-<td align="center"><img src="https://avatars.githubusercontent.com/u/133889737?s=100&v=4" width="100" height="100"><br>Ahmed Wael</td>
-</tr>
-<tr>
-
-<td align="center">Full-Stack Development</td>
-<td align="center">Full-Stack Development</td>
-</tr>
-</table>
-</p>
