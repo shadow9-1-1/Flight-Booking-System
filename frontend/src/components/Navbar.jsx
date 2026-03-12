@@ -29,7 +29,7 @@ const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              className="navbar-auth-links"
             >
               <Link to="/bookings">My Bookings</Link>
               {user.role === 'admin' && <Link to="/admin" className="nav-admin-link">Admin</Link>}
@@ -50,7 +50,7 @@ const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              className="navbar-auth-links"
             >
               <Link to="/login">Login</Link>
               <Link to="/register">Register</Link>

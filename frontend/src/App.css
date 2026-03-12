@@ -33,6 +33,20 @@
 }
 
 
+/* ── Global ── */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+
 /* ── Navbar ── */
 
 .navbar {
@@ -40,7 +54,12 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    height: 68px;
+    height: auto;
+    min-height: 68px;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -65,6 +84,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.navbar-auth-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .navbar-links a {
@@ -947,11 +974,17 @@
 
 @media (max-width: 768px) {
     .navbar {
-        padding: 0 1rem;
+        padding: 0.75rem 1rem;
     }
     .navbar-links {
         gap: 0.25rem;
         font-size: 0.85rem;
+        flex-wrap: wrap;
+    }
+    .navbar-auth-links {
+        gap: 0.35rem;
+        font-size: 0.85rem;
+        flex-wrap: wrap;
     }
     .search-fields {
         grid-template-columns: 1fr 1fr;
@@ -967,19 +1000,68 @@
         align-items: flex-start;
         gap: 0.75rem;
     }
+    .admin-table {
+        min-width: 600px;
+    }
+    .page h1 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 500px) {
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+    .navbar-brand {
+        text-align: center;
+    }
+    .navbar-links {
+        justify-content: center;
+        gap: 0.25rem;
+    }
+    .navbar-auth-links {
+        justify-content: center;
+        gap: 0.35rem;
+    }
+    .navbar-links a {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    .navbar-user {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+    .btn-outline {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.8rem;
+    }
     .search-fields {
         grid-template-columns: 1fr;
+    }
+    .flight-card-header {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .flight-price {
+        font-size: 1.15rem;
     }
     .flight-details,
     .booking-details {
         flex-direction: column;
         gap: 0.4rem;
     }
+    .booking-card-header {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
     .auth-card {
         padding: 1.75rem 1.25rem;
+    }
+    .auth-card h1 {
+        font-size: 1.4rem;
     }
     .booking-inline-row {
         flex-direction: column;
@@ -987,6 +1069,9 @@
     }
     .page {
         padding: 1.5rem 1rem;
+    }
+    .page h1 {
+        font-size: 1.35rem;
     }
     .admin-stats-grid {
         grid-template-columns: 1fr;
@@ -996,5 +1081,24 @@
     }
     .admin-quick-links {
         grid-template-columns: 1fr;
+    }
+    .admin-table {
+        min-width: 500px;
+    }
+    .stat-value {
+        font-size: 1.6rem;
+    }
+    .admin-form {
+        padding: 1.25rem;
+    }
+    .admin-form-actions {
+        flex-direction: column;
+    }
+    .admin-form-actions .btn {
+        width: 100%;
+    }
+    .table-actions {
+        flex-direction: column;
+        gap: 0.3rem;
     }
 }
