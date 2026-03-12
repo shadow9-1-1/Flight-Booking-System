@@ -270,7 +270,7 @@ npm run script:admin
 
 | Page | Preview |
 |------|---------|
-| Login | _screenshot_ |
+| Login | ![alt text](image.png) |
 | Flight Search | _screenshot_ |
 | Booking History | _screenshot_ |
 
