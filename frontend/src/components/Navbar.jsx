@@ -32,6 +32,7 @@ const Navbar = () => {
               style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
             >
               <Link to="/bookings">My Bookings</Link>
+              {user.role === 'admin' && <Link to="/admin" className="nav-admin-link">Admin</Link>}
               <span className="navbar-user">Hi, {user.name}</span>
               <motion.button
                 onClick={handleLogout}
