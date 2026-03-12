@@ -271,19 +271,9 @@ npm run script:admin
 | Page | Preview |
 |------|---------|
 | Login | ![alt text](image.png) |
-| Flight Search | _screenshot_ |
-| Booking History | _screenshot_ |
+| Flight Search | ![alt text](image-1.png) |
+| Booking History | ![alt text](image-2.png) |
 
 ---
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-<div align="center">
-
-Made with ❤️ by [shadow9-1-1](https://github.com/shadow9-1-1)
 
 </div>
