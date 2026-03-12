@@ -287,10 +287,10 @@ npm run script:admin
 
 > **Tip:** To add screenshots, log in as admin (`admin@email.com` / `admin123`), take screenshots of each page, save them in the project root, and name them to match the filenames above.
 
----
+-------------
 
 </div>
-###👥 Development Team
+👥 Development Team
 
 <p align="center">
 <table align="center" style="margin:0 auto; text-align:center;">
