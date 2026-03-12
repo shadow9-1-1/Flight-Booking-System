@@ -290,7 +290,7 @@ npm run script:admin
 ---
 
 </div>
-##👥 Development Team
+###👥 Development Team
 
 <p align="center">
 <table align="center" style="margin:0 auto; text-align:center;">
