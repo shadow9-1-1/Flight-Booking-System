@@ -59,7 +59,7 @@ A full-stack flight booking application built with **React** and **Node.js** tha
 | **Frontend** | React 19, React Router 7, Axios, Framer Motion, Vite        |
 | **Backend**  | Node.js, Express, Mongoose, JWT, bcryptjs                   |
 | **Database** | MongoDB                                                     |
-| **Email**    | Mailtrap / Nodemailer                                       |
+| **Email**    | Mailtrap                                                    |
 | **Auth**     | JWT tokens (7-day expiry), bcrypt password hashing          |
 
 ---
@@ -88,7 +88,7 @@ Flight-Booking-System/
 │   │   ├── bookingRoutes.js
 │   │   └── flightRoutes.js
 │   ├── script/
-│   │   └── adminScript.js        # Seed default admin account
+│   │   └── adminScript.js        
 │   ├── utils/
 │   │   └── emailService.js       # Mailtrap email sender
 │   ├── server.js
@@ -154,7 +154,7 @@ npm install
 Create a `.env` file in the `backend/` directory (see [Environment Variables](#-environment-variables)).
 
 ```bash
-# Seed the admin account
+# create the admin account
 npm run script:admin
 
 # Start the server
@@ -266,7 +266,6 @@ npm run script:admin
 
 ## 📸 Screenshots
 
-> Add screenshots of your application here.
 
 | Page | Preview |
 |------|---------|
